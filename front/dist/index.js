@@ -10,43 +10,13 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./app/js/parseUA.js":
-/*!***************************!*\
-  !*** ./app/js/parseUA.js ***!
-  \***************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"parseUA\": () => (/* binding */ parseUA)\n/* harmony export */ });\nfunction parseUA(type) {\n  return fetch(`/ua/${type}`)\n    .then((response) => response.json())\n    .then((json) => json.message);\n}\n\n\n//# sourceURL=webpack://calc/./app/js/parseUA.js?");
-
-/***/ }),
-
-/***/ "./app/js/resultComponent.js":
-/*!***********************************!*\
-  !*** ./app/js/resultComponent.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"resultComponent\": () => (/* binding */ resultComponent)\n/* harmony export */ });\nfunction resultComponent(text = \"\") {\n  const div = document.createElement(\"div\");\n  const h1 = document.createElement(\"h1\");\n  const nextNode = document.createTextNode(text);\n\n  h1.appendChild(nextNode);\n  div.className = \"result\";\n  div.appendChild(h1);\n\n  return div;\n}\n\n\n//# sourceURL=webpack://calc/./app/js/resultComponent.js?");
-
-/***/ }),
-
-/***/ "./app/js/selectComponent.js":
-/*!***********************************!*\
-  !*** ./app/js/selectComponent.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"selectComponent\": () => (/* binding */ selectComponent)\n/* harmony export */ });\n/* harmony import */ var _resultComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./resultComponent */ \"./app/js/resultComponent.js\");\n/* harmony import */ var _parseUA__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parseUA */ \"./app/js/parseUA.js\");\n\n\n\nfunction selectComponent(options = []) {\n  const selectElement = document.createElement(\"select\");\n\n  options.forEach((option) => {\n    const optionElement = document.createElement(\"option\");\n    optionElement.text = option.text;\n    optionElement.value = option.value;\n    if (!option.value) {\n      optionElement.selected = true;\n      optionElement.disabled = true;\n    }\n    selectElement.add(optionElement, null);\n  });\n\n  selectElement.addEventListener(\"change\", async (e) => {\n    const message = await (0,_parseUA__WEBPACK_IMPORTED_MODULE_1__.parseUA)(e.target.value);\n    const oldResult = document.querySelector(\".result\");\n    const newResult = (0,_resultComponent__WEBPACK_IMPORTED_MODULE_0__.resultComponent)(message);\n\n    if (oldResult) {\n      oldResult.parentElement.replaceChild(newResult, oldResult);\n    } else {\n      document.querySelector(\"#root\").append(newResult);\n    }\n  });\n\n  return selectElement;\n}\n\n\n//# sourceURL=webpack://calc/./app/js/selectComponent.js?");
-
-/***/ }),
-
 /***/ "./app/main.js":
 /*!*********************!*\
   !*** ./app/main.js ***!
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/style.css */ \"./app/styles/style.css\");\n/* harmony import */ var _js_selectComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/selectComponent */ \"./app/js/selectComponent.js\");\n\n\n\nconst app = document.querySelector(\"#root\");\nconst options = [\n  {\n    value: \"\",\n    text: \"Select\",\n  },\n  {\n    value: \"ip\",\n    text: \"Get IP\",\n  },\n  {\n    value: \"device\",\n    text: \"Get Device\",\n  },\n  {\n    value: \"os\",\n    text: \"Get Operating System\",\n  },\n  {\n    value: \"browser\",\n    text: \"Get Browser\",\n  },\n];\n\nconst select = (0,_js_selectComponent__WEBPACK_IMPORTED_MODULE_1__.selectComponent)(options);\napp.append(select);\n\n\n//# sourceURL=webpack://calc/./app/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/style.css */ \"./app/styles/style.css\");\n\n// import { selectComponent } from \"./js/selectComponent\";\nconsole.log(\"ofirr\");\n\n\n//# sourceURL=webpack://calc/./app/main.js?");
 
 /***/ }),
 
