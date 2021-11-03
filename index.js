@@ -4,13 +4,14 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const path = require("path");
 
 app.use(cors());
 
 app.use("/", express.static(`./front/dist`));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/front/dist/index.html");
+  res.sendFile(path.resolve(__dirname, "./front/dist/index.html"));
 });
 
 app.listen(PORT, () => {
