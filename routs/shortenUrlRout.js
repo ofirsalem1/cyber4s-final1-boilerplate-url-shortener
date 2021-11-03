@@ -6,8 +6,11 @@ const fs = require("fs");
 const { json } = require("body-parser");
 
 const baseUrl = "http://localhost:3000/short/";
+console.log("1");
 
 router.post("/", (req, res) => {
+  console.log("2");
+
   shortId = shortid.generate();
   longUrl = req.body.url;
   dataBase = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
@@ -22,10 +25,12 @@ router.post("/", (req, res) => {
   res.send(baseUrl + shortId);
 });
 
-router.get("/:shortId", (req, res) => {
-  dataBase = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
-  res.redirect(301, dataBase[req.params.shortId].longUrl);
-  res.end();
+router.get("/:shortid", (req, res) => {
+  const shortId = req.params.shortid;
+  const dataBase = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+  dataBase[shortId]["redirectCount"] += 1;
+  fs.writeFileSync("./db.json", JSON.stringify(dataBase));
+  res.redirect(301, dataBase[shortId].longUrl);
 });
 
 module.exports = router;
