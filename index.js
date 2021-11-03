@@ -5,6 +5,8 @@ const cors = require("cors");
 const app = express();
 const path = require("path");
 const shortenUrlRout = require("./routs/shortenUrlRout");
+const { errorHandler } = require("./middleware/errorHandler");
+
 app.use(cors());
 
 app.use(express.json()); // parses requests as json
@@ -15,6 +17,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/short", shortenUrlRout);
+
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
