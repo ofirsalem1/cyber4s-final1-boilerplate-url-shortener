@@ -9,25 +9,18 @@
 
   <body>
     <h1>URL Shortener Microservice</h1>
-    <main>
-      <section>
-        <form action="api/shorturl/new" method="POST">
-          <fieldset>
-            <legend>URL Shortener</legend>
-            <label for="url_input">URL:</label>
+          <div id="main-div">
+            <h2>URL Shortener</h2>
+            <label for="url_input"></label>
             <input
               id="url_input"
               type="text"
               name="url"
-              placeholder="https://www.freecodecamp.org/"
+              placeholder="Enter your URL"
             />
-            <input type="submit" value="POST URL" />
-          </fieldset>
-        </form>
-      </section>
-    </main>
-    <footer>
-      <p>By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
-    </footer>
+            <button id="shorten-btn">SHORTEN</button>
+          </div>
+          <div id="new-url-div">Your new URL: https://unpkg.com/axios/dist/axios.min.js</div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>
