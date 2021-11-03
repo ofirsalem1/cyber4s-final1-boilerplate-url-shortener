@@ -5,10 +5,10 @@ const app = express();
 
 app.use(cors());
 
-app.use("/public", express.static(`./public`));
+app.use("/", express.static(`./front/dist`));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+  res.sendFile(__dirname + "/front/dist/index.html");
 });
 
 module.exports = app;
