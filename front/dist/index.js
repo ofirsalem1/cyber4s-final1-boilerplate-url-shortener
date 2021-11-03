@@ -16,7 +16,7 @@
   \*********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/style.css */ \"./app/styles/style.css\");\n\nconst shortenBtnEl = document.getElementById(\"shorten-btn\");\nconst urlInputEl = document.getElementById(\"url_input\");\nconst newUrlDivEl = document.getElementById(\"new-url-div\");\n\nconst baseUrl = \"http://localhost:3000/short/\";\n\nshortenBtnEl.addEventListener(\"click\", postUrl);\n\nasync function postUrl() {\n  const response = await axios.post(baseUrl, {\n    url: `${urlInputEl.value}`,\n  });\n  newUrlDivEl.innerText = `Your new URL: ${response.data}`;\n  newUrlDivEl.style.display = \"block\";\n}\n\n\n//# sourceURL=webpack://calc/./app/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/style.css */ \"./app/styles/style.css\");\n\nconst shortenBtnEl = document.getElementById(\"shorten-btn\");\nconst urlInputEl = document.getElementById(\"url_input\");\nconst newUrlDivEl = document.getElementById(\"new-url-div\");\n\nconst baseUrl = \"http://localhost:3000/short/\";\n\nshortenBtnEl.addEventListener(\"click\", postUrl);\n\nasync function postUrl() {\n  const response = await axios.post(baseUrl, {\n    url: `${urlInputEl.value}`,\n  });\n  const a = document.createElement(\"a\");\n  a.href = response.data;\n  a.innerText = `${response.data}`;\n  newUrlDivEl.appendChild(a);\n  newUrlDivEl.style.display = \"block\";\n}\n\n\n//# sourceURL=webpack://calc/./app/main.js?");
 
 /***/ }),
 

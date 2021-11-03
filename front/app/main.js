@@ -11,6 +11,9 @@ async function postUrl() {
   const response = await axios.post(baseUrl, {
     url: `${urlInputEl.value}`,
   });
-  newUrlDivEl.innerText = `Your new URL: ${response.data}`;
+  const a = document.createElement("a");
+  a.href = response.data;
+  a.innerText = `${response.data}`;
+  newUrlDivEl.appendChild(a);
   newUrlDivEl.style.display = "block";
 }
