@@ -7,10 +7,11 @@ const usernameInputEl = document.getElementById("username-input");
 const newUrlDivEl = document.getElementById("new-url-div");
 const loginDivEl = document.getElementById("login-div");
 const shortenDivEl = document.getElementById("shorten-div");
+const statisticDivEl = document.getElementById("statistics-div");
 /************** DOM element **************/
 
 /************** Global variables **************/
-const baseUrl = "http://localhost:3000/short/";
+const baseUrl = "http://localhost:3000/";
 let userName = "";
 /************** Global variables **************/
 
@@ -27,9 +28,23 @@ function saveUsername() {
   }
   loginDivEl.style.display = "none";
   shortenDivEl.style.display = "block";
+  showStatistic();
 }
-
 /************** Show the correct div **************/
+
+async function showStatistic() {
+  const response = await axios.get(`${baseUrl}statistic/${userName}`);
+  for (let i of response.data) {
+    const div = document.createElement("div");
+    div.classList.add("statistic-div");
+    div.innerText += `Short URL: ${JSON.stringify(i.shortUrl)}\n
+    Long URL: ${JSON.stringify(i.longUrl)}\n
+    Creation date: ${JSON.stringify(i.creationDate)}\n 
+    redirect Count: ${JSON.stringify(i.redirectCount)} `;
+    statisticDivEl.appendChild(div);
+  }
+  statisticDivEl.style.display = "block";
+}
 
 async function postUrl() {
   try {
@@ -39,7 +54,7 @@ async function postUrl() {
       newUrlDivEl.style.display = "block";
       return;
     }
-    const response = await axios.post(baseUrl, {
+    const response = await axios.post(`${baseUrl}short`, {
       url: `${urlInputEl.value}`,
       username: userName,
     });
