@@ -9,29 +9,40 @@ const baseUrl = "http://localhost:3000/short/";
 
 router.post("/", (req, res) => {
   try {
-    shortId = shortid.generate();
-    longUrl = req.body.url;
-    dataBase = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
-    for (let key in dataBase) {
-      if (dataBase[key].longUrl === longUrl) {
-        return res.send(baseUrl + dataBase[key].shortId);
-      }
-    }
+    const userName = req.body.username;
+    const shortId = shortid.generate();
+    const longUrl = req.body.url;
     const urlObj = { shortId, longUrl, creationDate: new Date(Date.now()), redirectCount: 0 };
-    dataBase[shortId] = urlObj;
-    fs.writeFileSync("./db.json", JSON.stringify(dataBase));
-    res.send(baseUrl + shortId);
+    if (fs.existsSync(`./users/${userName}.json`)) {
+      const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
+      for (let key in dataBase) {
+        if (dataBase[key].longUrl === longUrl) {
+          return res.send(baseUrl + dataBase[key].shortId);
+        }
+      }
+      dataBase[shortId] = urlObj;
+      fs.writeFileSync(`./users/${userName}.json`, JSON.stringify(dataBase));
+      res.send(baseUrl + userName + "/" + shortId);
+    } else {
+      fs.writeFileSync(`./users/${userName}.json`, "{}");
+      const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
+      // const urlObj = { shortId, longUrl, creationDate: new Date(Date.now()), redirectCount: 0 };
+      dataBase[shortId] = urlObj;
+      fs.writeFileSync(`./users/${userName}.json`, JSON.stringify(dataBase));
+      res.send(baseUrl + userName + "/" + shortId);
+    }
   } catch (error) {
     throw { /*status: "404",*/ message: "there was an error" };
   }
 });
 
-router.get("/:shortid", (req, res) => {
+router.get("/:userName/:shortid", (req, res) => {
   try {
+    const userName = req.params.userName;
     const shortId = req.params.shortid;
-    const dataBase = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+    const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
     dataBase[shortId]["redirectCount"] += 1;
-    fs.writeFileSync("./db.json", JSON.stringify(dataBase));
+    fs.writeFileSync(`./users/${userName}.json`, JSON.stringify(dataBase));
     res.redirect(301, dataBase[shortId].longUrl);
   } catch (error) {
     throw { /*status: "404",*/ message: "there was an error" };
