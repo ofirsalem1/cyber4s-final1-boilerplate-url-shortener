@@ -31,19 +31,19 @@ function saveUsername() {
   showStatistic();
 }
 /************** Show the correct div **************/
+urlInputEl.addEventListener("keyup", enterPostUrl);
+usernameInputEl.addEventListener("keyup", enterSaveUsername);
 
-async function showStatistic() {
-  const response = await axios.get(`${baseUrl}statistic/${userName}`);
-  for (let i of response.data) {
-    const div = document.createElement("div");
-    div.classList.add("statistic-div");
-    div.innerText += `Short URL: ${JSON.stringify(i.shortUrl)}\n
-    Long URL: ${JSON.stringify(i.longUrl)}\n
-    Creation date: ${JSON.stringify(i.creationDate)}\n 
-    redirect Count: ${JSON.stringify(i.redirectCount)} `;
-    statisticDivEl.appendChild(div);
+function enterSaveUsername(event) {
+  if (event.keyCode === 13) {
+    saveUsername();
   }
-  statisticDivEl.style.display = "block";
+}
+
+function enterPostUrl(event) {
+  if (event.keyCode === 13) {
+    postUrl();
+  }
 }
 
 async function postUrl() {
@@ -80,4 +80,18 @@ function isValidHttpUrl(string) {
     return false;
   }
   return url.protocol === "http:" || url.protocol === "https:";
+}
+
+async function showStatistic() {
+  const response = await axios.get(`${baseUrl}statistic/${userName}`);
+  for (let i of response.data) {
+    const div = document.createElement("div");
+    div.classList.add("statistic-div");
+    div.innerText += `Short URL: ${JSON.stringify(i.shortUrl)}\n
+    Long URL: ${JSON.stringify(i.longUrl)}\n
+    Creation date: ${JSON.stringify(i.creationDate)}\n 
+    redirect Count: ${JSON.stringify(i.redirectCount)} `;
+    statisticDivEl.appendChild(div);
+  }
+  statisticDivEl.style.display = "block";
 }
