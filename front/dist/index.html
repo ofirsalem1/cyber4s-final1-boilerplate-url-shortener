@@ -3,25 +3,23 @@
 <html>
   <head>
     <title>URL Shortener</title>
-    <!-- <link rel="icon" type="image/png" href="./styles/favicon.ico" /> -->
-    <!-- <link href="./styles/style.css" rel="stylesheet" type="text/css" /> -->
   <script defer src="./index.js"></script></head>
 
   <body>
     <h1>URL Shortener Microservice</h1>
-          <div id="main-div">
-            <input type="text" placeholder="Enter your username">
-            <h2>URL Shortener</h2>
-            <label for="url_input"></label>
-            <input
-              id="url_input"
-              type="text"
-              name="url"
-              placeholder="Enter your URL"
-            />
-            <button id="shorten-btn">SHORTEN</button>
-          </div>
+    <div id="main-div">
+      <h2>URL Shortener</h2>
+      <div id="login-div">
+        <input id="username-input" type="text" placeholder="Enter your username">
+        <button id="login-btn">login</button>
+      </div>
+      <div id="shorten-div">
+        <input id="url-input" type="text" name="url" placeholder="Enter your URL"/>
+        <button id="shorten-btn">SHORTEN</button>
+      </div>
+    </div>
           <div id="new-url-div">Your new URL: </div>
+          <div id="Statistics-div"></div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </body>
 </html>

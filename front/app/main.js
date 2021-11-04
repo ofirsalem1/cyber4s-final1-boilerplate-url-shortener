@@ -1,11 +1,35 @@
 import "./styles/style.css";
+/************** DOM element **************/
 const shortenBtnEl = document.getElementById("shorten-btn");
-const urlInputEl = document.getElementById("url_input");
+const loginBtnEl = document.getElementById("login-btn");
+const urlInputEl = document.getElementById("url-input");
+const usernameInputEl = document.getElementById("username-input");
 const newUrlDivEl = document.getElementById("new-url-div");
+const loginDivEl = document.getElementById("login-div");
+const shortenDivEl = document.getElementById("shorten-div");
+/************** DOM element **************/
 
+/************** Global variables **************/
 const baseUrl = "http://localhost:3000/short/";
+let userName = "";
+/************** Global variables **************/
 
+/************** Event listener **************/
 shortenBtnEl.addEventListener("click", postUrl);
+loginBtnEl.addEventListener("click", saveUsername);
+/************** Event listener **************/
+
+/************** Show the correct div **************/
+function saveUsername() {
+  userName = usernameInputEl.value;
+  if (!usernameInputEl.value) {
+    userName = "username";
+  }
+  loginDivEl.style.display = "none";
+  shortenDivEl.style.display = "block";
+}
+
+/************** Show the correct div **************/
 
 async function postUrl() {
   try {
@@ -17,6 +41,7 @@ async function postUrl() {
     }
     const response = await axios.post(baseUrl, {
       url: `${urlInputEl.value}`,
+      username: userName,
     });
     const a = document.createElement("a");
     a.href = response.data;
