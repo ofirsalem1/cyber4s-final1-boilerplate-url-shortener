@@ -4,6 +4,7 @@ const cors = require("cors");
 const app = express();
 const path = require("path");
 const shortenUrlRout = require("./routs/shortenUrlRout");
+const statisticRout = require("./routs/statisticRout");
 const { errorHandler } = require("./middleware/errorHandler");
 
 app.use(cors());
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./front/dist/index.html"));
 });
 app.use("/short", shortenUrlRout);
+app.use("/statistic", statisticRout);
 
 app.use(errorHandler);
 

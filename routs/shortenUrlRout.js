@@ -12,12 +12,12 @@ router.post("/", (req, res) => {
     const userName = req.body.username;
     const shortId = shortid.generate();
     const longUrl = req.body.url;
-    const urlObj = { shortId, longUrl, creationDate: new Date(Date.now()), redirectCount: 0 };
+    const urlObj = { shortUrl: `${baseUrl}${userName}/${shortId}`, longUrl, creationDate: new Date(Date.now()), redirectCount: 0 };
     if (fs.existsSync(`./users/${userName}.json`)) {
       const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
       for (let key in dataBase) {
         if (dataBase[key].longUrl === longUrl) {
-          return res.send(baseUrl + dataBase[key].shortId);
+          return res.send(dataBase[key].shortUrl);
         }
       }
       dataBase[shortId] = urlObj;
@@ -26,7 +26,6 @@ router.post("/", (req, res) => {
     } else {
       fs.writeFileSync(`./users/${userName}.json`, "{}");
       const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
-      // const urlObj = { shortId, longUrl, creationDate: new Date(Date.now()), redirectCount: 0 };
       dataBase[shortId] = urlObj;
       fs.writeFileSync(`./users/${userName}.json`, JSON.stringify(dataBase));
       res.send(baseUrl + userName + "/" + shortId);
@@ -50,3 +49,13 @@ router.get("/:userName/:shortid", (req, res) => {
 });
 
 module.exports = router;
+
+// function creatUniqeId(userName) {
+//   const shortId = shortid.generate();
+//   const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
+//   for (let key in dataBase) {
+//     if (dataBase[key].shortId === longUrl) {
+//       return res.send(baseUrl + dataBase[key].shortId);
+//     }
+//   }
+// }
