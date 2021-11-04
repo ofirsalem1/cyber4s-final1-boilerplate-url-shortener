@@ -3,7 +3,7 @@ const shortenBtnEl = document.getElementById("shorten-btn");
 const urlInputEl = document.getElementById("url_input");
 const newUrlDivEl = document.getElementById("new-url-div");
 
-const baseUrl = "http://localhost:3000/short/";
+const baseUrl = "/";
 
 shortenBtnEl.addEventListener("click", postUrl);
 
