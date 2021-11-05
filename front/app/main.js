@@ -76,6 +76,7 @@ async function createUrlShorten() {
     const a = document.createElement("a");
     a.href = response.data;
     a.innerText = `${response.data}`;
+    newUrlDivEl.innerText = "Your new shorten URL: ";
     newUrlDivEl.appendChild(a);
     newUrlDivEl.style.display = "block";
   } catch (error) {
@@ -118,24 +119,26 @@ async function showHistoryUrl() {
 
 /************** search URL statistic **************/
 async function searchStatistic() {
-  searchStatisticDivEl.removeChild(searchStatisticDivEl.firstChild);
+  if (searchStatisticDivEl.firstChild) {
+    searchStatisticDivEl.removeChild(searchStatisticDivEl.firstChild);
+  }
   if (searchStatisticInputEl.value === "") {
     const div = document.createElement("div");
     div.classList.add("statistic-div");
     div.innerText = "you must enter somting";
     searchStatisticDivEl.appendChild(div);
-    return;
-  }
-  const searchStatisticInputArr = searchStatisticInputEl.value.split("/");
-  const shortId = searchStatisticInputArr[searchStatisticInputArr.length - 1]; // take the short ID from the search input
-  const username = searchStatisticInputArr[searchStatisticInputArr.length - 2]; // take the username from the search input
-  const response = await axios.get(`${baseUrl}statistic/${username}/${shortId}`);
-  const div = document.createElement("div");
-  div.classList.add("statistic-div");
-  div.innerText += `Short URL: ${JSON.stringify(response.data.shortUrl)}\n
+  } else {
+    const searchStatisticInputArr = searchStatisticInputEl.value.split("/");
+    const shortId = searchStatisticInputArr[searchStatisticInputArr.length - 1]; // take the short ID from the search input
+    const username = searchStatisticInputArr[searchStatisticInputArr.length - 2]; // take the username from the search input
+    const response = await axios.get(`${baseUrl}statistic/${username}/${shortId}`);
+    const div = document.createElement("div");
+    div.classList.add("statistic-div");
+    div.innerText += `Short URL: ${JSON.stringify(response.data.shortUrl)}\n
   Long URL: ${JSON.stringify(response.data.longUrl)}\n
   Creation date: ${JSON.stringify(response.data.creationDate)}\n
   redirect Count: ${JSON.stringify(response.data.redirectCount)} `;
-  searchStatisticDivEl.appendChild(div);
+    searchStatisticDivEl.appendChild(div);
+  }
 }
 /************** search URL statistic **************/
