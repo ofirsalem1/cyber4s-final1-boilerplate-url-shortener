@@ -84,6 +84,7 @@ async function createUrlShorten() {
     alert(error.response.data);
   }
 }
+
 /************** Return shorten url **************/
 
 /************** Check if the URL is valid **************/
@@ -107,10 +108,10 @@ async function showHistoryUrl() {
   for (let i of response.data) {
     const div = document.createElement("div");
     div.classList.add("statistic-div");
-    div.innerText = `Short URL: ${JSON.stringify(i.shortUrl)}\n
-    Long URL: ${JSON.stringify(i.longUrl)}\n
-    Creation date: ${JSON.stringify(i.creationDate)}\n 
-    redirect Count: ${JSON.stringify(i.redirectCount)} `;
+    div.innerText = `Short URL: ${i.shortUrl}\n
+    Long URL: ${i.longUrl.slice(0, 50)}...\n
+    Creation date: ${i.creationDate}\n 
+    redirect Count: ${i.redirectCount} `;
     statisticDivEl.appendChild(div);
   }
   statisticDivEl.style.display = "block";
@@ -128,17 +129,27 @@ async function searchStatistic() {
     div.innerText = "The URL is not valid";
     searchStatisticDivEl.appendChild(div);
   } else {
-    const searchStatisticInputArr = searchStatisticInputEl.value.split("/");
-    const shortId = searchStatisticInputArr[searchStatisticInputArr.length - 1]; // take the short ID from the search input
-    const username = searchStatisticInputArr[searchStatisticInputArr.length - 2]; // take the username from the search input
-    const response = await axios.get(`${baseUrl}statistic/${username}/${shortId}`);
-    const div = document.createElement("div");
-    div.classList.add("statistic-div");
-    div.innerText += `Short URL: ${JSON.stringify(response.data.shortUrl)}\n
-  Long URL: ${JSON.stringify(response.data.longUrl)}\n
-  Creation date: ${JSON.stringify(response.data.creationDate)}\n
-  redirect Count: ${JSON.stringify(response.data.redirectCount)} `;
-    searchStatisticDivEl.appendChild(div);
+    try {
+      const searchStatisticInputArr = searchStatisticInputEl.value.split("/");
+      const shortId = searchStatisticInputArr[searchStatisticInputArr.length - 1]; // take the short ID from the search input
+      const username = searchStatisticInputArr[searchStatisticInputArr.length - 2]; // take the username from the search input
+      const response = await axios.get(`${baseUrl}statistic/${username}/${shortId}`);
+      const div = document.createElement("div");
+      div.classList.add("statistic-div");
+      div.innerText = `Short URL: ${response.data.shortUrl}\n
+      Long URL: ${response.data.longUrl.slice(0, 50)}...\n
+      Creation date: ${response.data.creationDate}\n
+      redirect Count: ${response.data.redirectCount} `;
+      searchStatisticDivEl.appendChild(div);
+    } catch (error) {
+      throw new Error("somting go warng");
+    }
   }
 }
 /************** search URL statistic **************/
+
+/************** for copy with button **************/
+// const copyText = document.getElementById("newurl").textContent; // text
+// const url = copyText.split("copy")[0];
+// navigator.clipboard.writeText(url);
+/************** for copy with button **************/
