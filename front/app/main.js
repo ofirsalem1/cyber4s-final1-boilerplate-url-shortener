@@ -122,10 +122,10 @@ async function searchStatistic() {
   if (searchStatisticDivEl.firstChild) {
     searchStatisticDivEl.removeChild(searchStatisticDivEl.firstChild);
   }
-  if (searchStatisticInputEl.value === "") {
+  if (!isValidHttpUrl(searchStatisticInputEl.value)) {
     const div = document.createElement("div");
     div.classList.add("statistic-div");
-    div.innerText = "you must enter somting";
+    div.innerText = "The URL is not valid";
     searchStatisticDivEl.appendChild(div);
   } else {
     const searchStatisticInputArr = searchStatisticInputEl.value.split("/");
