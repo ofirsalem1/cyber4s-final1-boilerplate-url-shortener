@@ -69,7 +69,7 @@ async function createUrlShorten() {
       newUrlDivEl.style.display = "block";
       return;
     }
-    const response = await axios.post(`${baseUrl}short`, {
+    const response = await axios.post(`/short`, {
       url: `${urlInputEl.value}`,
       username: userName,
     });
@@ -104,7 +104,7 @@ function isValidHttpUrl(string) {
 
 /************** Show the URL history of the user **************/
 async function showHistoryUrl() {
-  const response = await axios.get(`${baseUrl}statistic/${userName}`);
+  const response = await axios.get(`/statistic/${userName}`);
   for (let i of response.data) {
     const div = document.createElement("div");
     div.classList.add("statistic-div");
@@ -133,7 +133,7 @@ async function searchStatistic() {
       const searchStatisticInputArr = searchStatisticInputEl.value.split("/");
       const shortId = searchStatisticInputArr[searchStatisticInputArr.length - 1]; // take the short ID from the search input
       const username = searchStatisticInputArr[searchStatisticInputArr.length - 2]; // take the username from the search input
-      const response = await axios.get(`${baseUrl}statistic/${username}/${shortId}`);
+      const response = await axios.get(`/statistic/${username}/${shortId}`);
       const div = document.createElement("div");
       div.classList.add("statistic-div");
       div.innerText = `Short URL: ${response.data.shortUrl}\n
