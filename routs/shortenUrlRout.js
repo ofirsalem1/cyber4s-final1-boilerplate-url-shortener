@@ -5,7 +5,7 @@ const router = express.Router();
 const fs = require("fs");
 const { json } = require("body-parser");
 
-const baseUrl = "/";
+const baseUrl = "https://ofir-shorten.herokuapp.com/";
 
 router.post("/", (req, res) => {
   try {
