@@ -5,7 +5,7 @@ const router = express.Router();
 const fs = require("fs");
 const { json } = require("body-parser");
 
-const baseUrl = "http://localhost:3000/short/";
+const baseUrl = "/";
 
 router.post("/", (req, res) => {
   try {
