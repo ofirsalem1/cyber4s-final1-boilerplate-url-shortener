@@ -82,7 +82,7 @@ async function createUrlShorten() {
     newUrlDivEl.style.display = "block";
   } catch (error) {
     console.log(error.response);
-    alert(error.response.data);
+    alert(error.response.data.error);
   }
 }
 
