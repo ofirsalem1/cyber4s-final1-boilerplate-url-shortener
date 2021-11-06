@@ -12,7 +12,7 @@ router.post("/", (req, res) => {
     const userName = req.body.username;
     const shortId = shortid.generate();
     const longUrl = req.body.url;
-    const urlObj = { shortUrl: `${baseUrl}${userName}/${shortId}`, longUrl, creationDate: new Date(Date.now()), redirectCount: 0 };
+    const urlObj = { shortUrl: `${baseUrl}short/${userName}/${shortId}`, longUrl, creationDate: new Date(Date.now()), redirectCount: 0 };
     if (fs.existsSync(`./users/${userName}.json`)) {
       const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
       for (let key in dataBase) {
@@ -22,7 +22,7 @@ router.post("/", (req, res) => {
       }
       dataBase[shortId] = urlObj;
       fs.writeFileSync(`./users/${userName}.json`, JSON.stringify(dataBase));
-      res.send(baseUrl + userName + "/" + shortId);
+      res.send(baseUrl + "short/" + userName + "/" + shortId);
     } else {
       fs.writeFileSync(`./users/${userName}.json`, "{}");
       const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
