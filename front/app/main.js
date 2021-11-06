@@ -81,7 +81,7 @@ async function createUrlShorten() {
     newUrlDivEl.style.display = "block";
   } catch (error) {
     console.log(error.response);
-    alert(error.response.data);
+    alert(error.response.data.error);
   }
 }
 
@@ -104,17 +104,22 @@ function isValidHttpUrl(string) {
 
 /************** Show the URL history of the user **************/
 async function showHistoryUrl() {
-  const response = await axios.get(`/statistic/${userName}`);
-  for (let i of response.data) {
-    const div = document.createElement("div");
-    div.classList.add("statistic-div");
-    div.innerText = `Short URL: ${i.shortUrl}\n
+  try {
+    const response = await axios.get(`/statistic/${userName}`);
+    for (let i of response.data) {
+      const div = document.createElement("div");
+      div.classList.add("statistic-div");
+      div.innerText = `Short URL: ${i.shortUrl}\n
     Long URL: ${i.longUrl.slice(0, 50)}...\n
     Creation date: ${i.creationDate}\n 
     redirect Count: ${i.redirectCount} `;
-    statisticDivEl.appendChild(div);
+      statisticDivEl.appendChild(div);
+    }
+    statisticDivEl.style.display = "block";
+  } catch (error) {
+    console.log(error.response);
+    alert(error.response.data.error);
   }
-  statisticDivEl.style.display = "block";
 }
 /************** Show the URL history of the user **************/
 
@@ -142,7 +147,8 @@ async function searchStatistic() {
       redirect Count: ${response.data.redirectCount} `;
       searchStatisticDivEl.appendChild(div);
     } catch (error) {
-      throw new Error("somting go warng");
+      console.log(error.response);
+      alert(error.response.data.error);
     }
   }
 }

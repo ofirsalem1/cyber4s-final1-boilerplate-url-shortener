@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
       res.send(baseUrl + "short/" + userName + "/" + shortId);
     }
   } catch (error) {
-    throw { /*status: "404",*/ message: "there was an error" };
+    throw { status: error.status, message: error.message };
   }
 });
 
@@ -44,7 +44,7 @@ router.get("/:userName/:shortid", (req, res) => {
     fs.writeFileSync(`./users/${userName}.json`, JSON.stringify(dataBase));
     res.redirect(301, dataBase[shortId].longUrl);
   } catch (error) {
-    throw { /*status: "404",*/ message: "there was an error" };
+    throw { status: error.status, message: error.message };
   }
 });
 
