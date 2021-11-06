@@ -28,7 +28,7 @@ router.post("/", (req, res) => {
       const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
       dataBase[shortId] = urlObj;
       fs.writeFileSync(`./users/${userName}.json`, JSON.stringify(dataBase));
-      res.send(baseUrl + "/short" + userName + "/" + shortId);
+      res.send(baseUrl + "short/" + userName + "/" + shortId);
     }
   } catch (error) {
     throw { /*status: "404",*/ message: "there was an error" };
