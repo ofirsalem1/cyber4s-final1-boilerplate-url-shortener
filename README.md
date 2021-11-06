@@ -1,4 +1,3 @@
 # URL shortner 📎
 
-![image](https://user-images.githubusercontent.com/89575154/140622855-2e53067f-6494-4e9e-a54f-4bd1f57c2be2.png)
-
+![image](https://user-images.githubusercontent.com/89575154/140622927-6da7a44c-1780-4ca4-9d3e-4e348dda63b9.png)
