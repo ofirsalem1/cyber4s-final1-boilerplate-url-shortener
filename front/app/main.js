@@ -33,7 +33,7 @@ function saveUsername() {
   if (usernameInputEl.value === "") {
     userName = "guest";
   } else {
-    showHistoryUrl(); // if the user is guest i dont want to show the history of url
+    // showHistoryUrl(); // if the user is guest i dont want to show the history of url
   }
   loginDivEl.style.display = "none";
   shortenDivEl.style.display = "block";
