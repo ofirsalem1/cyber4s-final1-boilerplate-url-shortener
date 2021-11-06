@@ -6,7 +6,6 @@
 // 401 for unauthenticated user request (pokemon requests missing the username header)
 
 function errorHandler(err, req, res, next) {
-  alert(err);
   if (!err.status) {
     return res.status(500).send({ error: "internal server error" });
   }
