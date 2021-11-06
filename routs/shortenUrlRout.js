@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
       res.send(baseUrl + "short/" + userName + "/" + shortId);
     }
   } catch (error) {
-    throw { status: error.status, message: error.message };
+    throw { /*status: "404",*/ message: "there was an error" };
   }
 });
 
