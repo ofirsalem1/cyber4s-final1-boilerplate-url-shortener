@@ -7,12 +7,14 @@ const shortid = require("shortid");
 router.get("/:username", (req, res) => {
   try {
     const userName = req.params.username;
-    const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
-    const userStatisticArr = [];
-    for (let key in dataBase) {
-      userStatisticArr.push(dataBase[key]);
+    if (fs.existsSync(`./users/${userName}.json`)) {
+      const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
+      const userStatisticArr = [];
+      for (let key in dataBase) {
+        userStatisticArr.push(dataBase[key]);
+      }
+      res.send(userStatisticArr);
     }
-    res.send(userStatisticArr);
   } catch (error) {
     throw { status: error.status, message: error.message };
   }
