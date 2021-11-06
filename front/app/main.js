@@ -32,9 +32,10 @@ function saveUsername() {
   userName = usernameInputEl.value;
   if (usernameInputEl.value === "") {
     userName = "guest";
-  } else {
-    // showHistoryUrl(); // if the user is guest i dont want to show the history of url
   }
+  // else {
+  // showHistoryUrl(); // if the user is guest i dont want to show the history of url
+  // }
   loginDivEl.style.display = "none";
   shortenDivEl.style.display = "block";
 }
@@ -103,19 +104,19 @@ function isValidHttpUrl(string) {
 /************** Check if the URL is valid **************/
 
 /************** Show the URL history of the user **************/
-async function showHistoryUrl() {
-  const response = await axios.get(`/statistic/${userName}`);
-  for (let i of response.data) {
-    const div = document.createElement("div");
-    div.classList.add("statistic-div");
-    div.innerText = `Short URL: ${i.shortUrl}\n
-    Long URL: ${i.longUrl.slice(0, 50)}...\n
-    Creation date: ${i.creationDate}\n 
-    redirect Count: ${i.redirectCount} `;
-    statisticDivEl.appendChild(div);
-  }
-  statisticDivEl.style.display = "block";
-}
+// async function showHistoryUrl() {
+//   const response = await axios.get(`/statistic/${userName}`);
+//   for (let i of response.data) {
+//     const div = document.createElement("div");
+//     div.classList.add("statistic-div");
+//     div.innerText = `Short URL: ${i.shortUrl}\n
+//     Long URL: ${i.longUrl.slice(0, 50)}...\n
+//     Creation date: ${i.creationDate}\n
+//     redirect Count: ${i.redirectCount} `;
+//     statisticDivEl.appendChild(div);
+//   }
+//   statisticDivEl.style.display = "block";
+// }
 /************** Show the URL history of the user **************/
 
 /************** search URL statistic **************/
