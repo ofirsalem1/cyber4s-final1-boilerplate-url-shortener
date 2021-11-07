@@ -116,7 +116,7 @@ async function showHistoryUrl() {
       const div = document.createElement("div");
       div.classList.add("statistic-div");
       div.innerText = `Short URL: ${i.shortUrl}\n
-    Long URL: ${i.longUrl.slice(0, 50)}...\n
+    Long URL: ${i.longUrl.slice(0, 80)}...\n
     Creation date: ${i.creationDate}\n 
     redirect Count: ${i.redirectCount} `;
       statisticDivEl.appendChild(div);
