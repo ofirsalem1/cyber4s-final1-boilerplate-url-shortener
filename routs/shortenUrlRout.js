@@ -3,6 +3,7 @@ const path = require("path");
 const shortid = require("shortid"); //short id generateor
 const router = express.Router();
 const fs = require("fs");
+const moment = require("moment");
 const { json } = require("body-parser");
 
 const baseUrl = "https://ofir-shorten-new.herokuapp.com/";
@@ -12,7 +13,7 @@ router.post("/", (req, res) => {
     const userName = req.body.username;
     const shortId = shortid.generate();
     const longUrl = req.body.url;
-    const urlObj = { shortUrl: `${baseUrl}short/${userName}/${shortId}`, longUrl, creationDate: new Date(Date.now()), redirectCount: 0 };
+    const urlObj = { shortUrl: `${baseUrl}short/${userName}/${shortId}`, longUrl, creationDate: moment().format("lll"), redirectCount: 0 };
     if (fs.existsSync(`./users/${userName}.json`)) {
       const dataBase = JSON.parse(fs.readFileSync(`./users/${userName}.json`, "utf-8"));
       for (let key in dataBase) {
