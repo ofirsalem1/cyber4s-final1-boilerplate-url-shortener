@@ -30,9 +30,14 @@ searchStatisticInputEl.addEventListener("keyup", enterSearchStatistic);
 /************** Show the correct div **************/
 function saveUsername() {
   userName = usernameInputEl.value;
+  const usernamepattern = /^[A-Za-z .]{3,15}$/; ////Regular expression
+  if (usernamepattern.test(userName)) {
+    return alert("You must enter valid username");
+  }
+
   if (usernameInputEl.value === "") {
     userName = "guest";
-  } else {
+
     showHistoryUrl(); // if the user is guest i dont want to show the history of url
   }
   loginDivEl.style.display = "none";
