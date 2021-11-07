@@ -64,6 +64,7 @@ input {
   padding: 2%;
   background: rgb(177, 214, 206);
   border: solid black 3px;
+  margin: 5%;
   display: none;
 }
 .statistic-div {
