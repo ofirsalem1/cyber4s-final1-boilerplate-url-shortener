@@ -58,11 +58,17 @@ input {
   display: none;
 }
 #statistics-div {
+  width: 90%;
+  margin-left: 3%;
+  margin-right: 10%;
+  padding: 2%;
+  background: rgb(177, 214, 206);
+  border: solid black 3px;
   display: none;
 }
 .statistic-div {
   width: 90%;
-  margin-left: 10%;
+  margin-left: 3%;
   margin-right: 10%;
   padding: 2%;
   background: rgb(177, 214, 206);
