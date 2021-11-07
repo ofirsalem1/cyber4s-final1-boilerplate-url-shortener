@@ -31,7 +31,7 @@ searchStatisticInputEl.addEventListener("keyup", enterSearchStatistic);
 function saveUsername() {
   userName = usernameInputEl.value;
   const usernamepattern = /^[A-Za-z .]{3,15}$/; ////Regular expression
-  if (usernamepattern.test(userName) || usernameInputEl.value > 10) {
+  if (!usernamepattern.test(userName)) {
     return alert("You must enter valid username");
   }
 
