@@ -46,8 +46,10 @@ input {
   padding: 2%;
   background: rgb(177, 214, 206);
 }
-.main-div {
-  margin: 5%;
+.search-div {
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
   border: solid black 3px;
   padding: 2%;
   background: rgb(177, 214, 206);
@@ -59,9 +61,9 @@ input {
   display: none;
 }
 .statistic-div {
-  width: 60%;
-  margin-left: 15%;
-  margin-right: 15%;
+  width: 90%;
+  margin-left: 10%;
+  margin-right: 10%;
   padding: 2%;
   background: rgb(177, 214, 206);
 }
